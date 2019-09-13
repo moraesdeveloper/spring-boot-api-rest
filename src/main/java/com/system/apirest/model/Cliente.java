@@ -21,12 +21,16 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
 	@Column(name = "nome_completo")
 	private String nomeCompleto;
+	
 	@NotNull
 	private String email;
+	
 	@NotNull
 	private String celular;
+	
 	@NotNull
 	private String cpf;
 	
@@ -61,6 +65,8 @@ public class Cliente implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,6 +74,8 @@ public class Cliente implements Serializable {
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -86,5 +94,4 @@ public class Cliente implements Serializable {
 	}
 	
 	
-
 }
