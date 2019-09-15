@@ -3,6 +3,9 @@ package com.system.apirest.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.system.apirest.exceptions.ResourceNotFoundException;
@@ -14,6 +17,11 @@ public class AgendamentoService {
 
 	@Autowired
 	private AgendamentoRepository agendamentoRepository;
+	
+	public Page<Agendamento> listarPaginado(int size, int page){
+		Pageable pageable = PageRequest.of(page, size);
+		return agendamentoRepository.findAll(pageable);
+	}
 	
 	
 	public Agendamento salvar(Agendamento agendamento) {

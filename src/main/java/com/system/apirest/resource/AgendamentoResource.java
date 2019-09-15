@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import com.system.apirest.service.AgendamentoService;
 
 @RestController
 @RequestMapping("/agendamentos")
+@CrossOrigin(origins = "*")
 public class AgendamentoResource {
 
 	@Autowired
@@ -26,10 +28,19 @@ public class AgendamentoResource {
 	@Autowired
 	private AgendamentoRepository agendamentoRepository;
 	
+	
 	@GetMapping
-	public List<Agendamento> listaTodos(){
+	public List<Agendamento> listar(){
 		return agendamentoRepository.findAll();
 	}
+	
+	/*
+	@GetMapping
+	public Page<Agendamento> listarPaginado(@RequestParam(value = "page", defaultValue="0") int page,
+											@RequestParam(value = "size", defaultValue="5") int size){
+		return agendamentoService.listarPaginado(size, page);
+	}
+	*/
 	
 	
 	@PostMapping
