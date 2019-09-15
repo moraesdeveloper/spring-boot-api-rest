@@ -2,10 +2,14 @@ package com.system.apirest.resource;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +45,14 @@ public class ProfissionalResource {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Profissional salvar(@RequestBody Profissional profissional) {
+	public Profissional salvar(@Valid @RequestBody Profissional profissional) {
 		return profissionalService.salvar(profissional);
+	}
+	
+	@DeleteMapping("/{codigo}")
+	public void deletar(@PathVariable Long codigo) {
+		Profissional profissional = profissionalRepository.findByCodigo(codigo);
+		profissionalRepository.delete(profissional);
 	}
 	
 }

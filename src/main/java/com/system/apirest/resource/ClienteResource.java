@@ -2,6 +2,8 @@ package com.system.apirest.resource;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,12 +51,12 @@ public class ClienteResource {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente salvar(@RequestBody Cliente cliente) {
+	public Cliente salvar(@Valid @RequestBody Cliente cliente) {
 		return clienteService.salvar(cliente);
 	}
 	
 	@PutMapping("/{codigo}")
-	public Cliente atualizar(@RequestBody Cliente cliente, @PathVariable Long codigo) {
+	public Cliente atualizar(@Valid @RequestBody Cliente cliente, @PathVariable Long codigo) {
 		return clienteService.atualizar(cliente, codigo);
 	}
 	
