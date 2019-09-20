@@ -2,6 +2,7 @@ package com.system.apirest.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,6 +38,13 @@ public class AgendamentoService {
 				throw new ResourceNotFoundException("Horário indisponivel para realizar agendamento");
 			}
 		}
+	}
+	
+	public Agendamento atualizar(Agendamento agendamento, Long codigo) {
+		Agendamento entity = agendamentoRepository.findByCodigo(codigo);
+		BeanUtils.copyProperties(agendamento, entity, "codigo");
+		agendamentoRepository.save(entity);
+		return entity;
 	}
 	
 	

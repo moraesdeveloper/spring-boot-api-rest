@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -44,6 +45,10 @@ public class AgendamentoResource {
 	}
 	*/
 	
+	@GetMapping("/{codigo}")
+	public Agendamento buscarPorCodigo(@PathVariable Long codigo) {
+		return agendamentoRepository.findByCodigo(codigo);
+	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -56,6 +61,11 @@ public class AgendamentoResource {
 	public void excluir(@PathVariable Long codigo) {
 		Agendamento agendamento = agendamentoRepository.findByCodigo(codigo);
 		agendamentoRepository.delete(agendamento);
+	}
+	
+	@PutMapping("/{codigo}")
+	public Agendamento atualizar(@RequestBody Agendamento agendamento, @PathVariable Long codigo) {
+		return agendamentoService.atualizar(agendamento, codigo);
 	}
 	
 	

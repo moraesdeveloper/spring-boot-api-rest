@@ -34,6 +34,7 @@ public class Profissional implements Serializable{
 	
 	@NotNull
 	private String cpf;
+	
 
 	public Long getCodigo() {
 		return codigo;
